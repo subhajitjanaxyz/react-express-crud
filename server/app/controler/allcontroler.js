@@ -37,3 +37,9 @@ export const getcontroller= async(req,res)=>{
     await dataMODEL.updateOne({_id:id},objecta)
     res.send("update done")
  }
+
+export const singledata= async (req,res)=>{
+const id=req.params.id;
+const data = await dataMODEL.findOne({_id:id})
+res.send(data)
+} 
