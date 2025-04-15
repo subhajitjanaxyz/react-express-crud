@@ -1,28 +1,47 @@
 import { useDispatch, useSelector } from "react-redux";
 import { datainsert } from "./store/alldata";
 import { useGetnjspostQuery } from "./store/apirtk";
+import { useEffect } from "react";
 // import { useEffect } from "react";
 
 
 export const Table = () => {
 
-  const dispatch = useDispatch()
-  const dataapi = useSelector(state => state.dbdata);
+  // const dispatch = useDispatch()
+  // const dataapi = useSelector(state => state.dbdata);
 
-  //call api
-  const { data, isLoading } = useGetnjspostQuery("67fcbc25a604384fa7d10511");
-  // insert data into variable
-  if (!isLoading) {
-    dispatch(datainsert(data));
-  }
-  // when data is avalable render 
-  if (dataapi) {
-    console.log("all data from api");
-    console.log(dataapi);
-  }
+  // //call api
+  // const { data, isLoading } = useGetnjspostQuery("67feb674a3101bcabfc49ef4");
+  // // insert data into variable
+  // if (!isLoading) {
+  //   dispatch(datainsert(data));
+  // }
+  // // when data is avalable render 
+  // if (dataapi) {
+  //   console.log("all data from api");
+  //   console.log(dataapi);
+  // }
 
 
+  const dispatch = useDispatch();
+  const dataapi = useSelector((state) => state.dbdata);
 
+  const { data, isLoading } = useGetnjspostQuery("67feb674a3101bcabfc49ef4");
+
+  // ✅ useEffect to dispatch after data is available
+  useEffect(() => {
+    if (!isLoading && data) {
+      dispatch(datainsert(data));
+    }
+  }, [data, isLoading, dispatch]);
+
+  // Optional: log your global state
+  useEffect(() => {
+    if (dataapi) {
+      console.log("All data from Redux state:");
+      console.log(dataapi);
+    }
+  }, [dataapi]);
 
 
   return (
