@@ -1,21 +1,22 @@
-import { Table } from "react-bootstrap";
+import { Table } from "./table";
 import { From } from "./FROM.JSX";
 
 const App=()=>{
+    
+
+ 
     return(
-        <>
+ <>
 
 <div className="">
 <From />
 <Table />
-
-
 </div>
 
 
 
 
-      </>
+</>
       
     )
 }
